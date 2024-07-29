@@ -2403,8 +2403,6 @@ void dcn20_optimize_bandwidth(
 	if (hubbub->funcs->program_compbuf_size)
 		hubbub->funcs->program_compbuf_size(hubbub, context->bw_ctx.bw.dcn.compbuf_size_kb, true);
 
-	dc->clk_mgr->clks.fw_based_mclk_switching = false;
-
 	dc->clk_mgr->funcs->update_clocks(
 			dc->clk_mgr,
 			context,
