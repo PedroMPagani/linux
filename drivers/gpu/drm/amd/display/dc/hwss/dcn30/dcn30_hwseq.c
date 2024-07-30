@@ -1165,10 +1165,6 @@ void dcn30_set_disp_pattern_generator(const struct dc *dc,
 void dcn30_prepare_bandwidth(struct dc *dc,
 	struct dc_state *context)
 {
-	if (context->bw_ctx.bw.dcn.clk.fw_based_mclk_switching && !dc->clk_mgr->clks.fw_based_mclk_switching) {
-		context->bw_ctx.bw.dcn.clk.p_state_change_support = false;
-	}
-
 	if (dc->clk_mgr->dc_mode_softmax_enabled)
 		if (dc->clk_mgr->clks.dramclk_khz <= dc->clk_mgr->bw_params->dc_mode_softmax_memclk * 1000 &&
 				context->bw_ctx.bw.dcn.clk.dramclk_khz > dc->clk_mgr->bw_params->dc_mode_softmax_memclk * 1000)
@@ -1176,6 +1172,4 @@ void dcn30_prepare_bandwidth(struct dc *dc,
 
 	dcn20_prepare_bandwidth(dc, context);
 
-	if (!dc->clk_mgr->clks.fw_based_mclk_switching)
-		dc_dmub_srv_p_state_delegate(dc, false, context);
 }
